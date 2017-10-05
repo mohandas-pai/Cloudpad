@@ -4,6 +4,7 @@
     android:id="@+id/activity_post"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/teal"
     tools:context="com.example.hp.cloudpad.PostActivity">
 
     <EditText
