@@ -40,11 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        /*int titleId = getResources().getIdentifier("action_bar_title", "id",
-                "android");
-        TextView yourTextView = (TextView) findViewById(titleId);
-        yourTextView.setTypeface(Typeface.MONOSPACE);*/
-
         mlog =(EditText)findViewById(R.id.logInEmail);
         mpass = (EditText)findViewById(R.id.logInPass);
         mlogbt = (Button)findViewById(R.id.logbtn);
@@ -65,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
         mregisterbt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                mpass.setText("");
+                mlog.setText("");
                 Intent mainIntent = new Intent(LoginActivity.this,RegisterActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(mainIntent);

@@ -9,7 +9,7 @@
     android:layout_marginTop="@dimen/task_card_half_spacing"
     android:layout_marginStart="@dimen/gutter"
     android:layout_marginEnd="@dimen/gutter"
-    card_view:cardBackgroundColor="@color/orange"
+    card_view:cardBackgroundColor="@color/grey"
     card_view:cardCornerRadius="2dp">
 
     <LinearLayout
@@ -17,7 +17,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <TextView
             android:id="@+id/posttitle"
             android:layout_width="match_parent"
@@ -25,15 +27,28 @@
             android:padding="15dp"
             android:fontFamily="cursive"
             android:gravity="center"
-            android:textSize="16dp"
+            android:textSize="25dp"
             android:textStyle="bold"
             android:text="Here goes title"/>
+
+        <ImageButton
+            android:id="@+id/starbuttn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_star_border_black_24dp"
+            android:background="@color/grey"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/postdesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="cursive"
+            android:textSize="20dp"
             android:padding="10dp"
             android:text="Here goes description"/>
 

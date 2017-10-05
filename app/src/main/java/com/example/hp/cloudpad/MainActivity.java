@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mNotesList;
     private DatabaseReference mDatabase;
-    private DatabaseReference mDatabaseUsr;
+    private DatabaseReference mDatabaseStar;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mFirebaseUser;
     String mUserId;
 
+    private boolean processstar = false;
 
     private ShakeDetector mShakeDetector;
     private SensorManager mSensorManager;
@@ -77,11 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
         //mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
         mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
-        mDatabaseUsr = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseStar = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Star");
 
-        mDatabaseUsr.keepSynced(true);
         mDatabase.keepSynced(true);
-
+        mDatabaseStar.keepSynced(true);
 
 
 
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+                viewHolder.setStarbutton(post_key);
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -151,6 +153,34 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(singleIntent);
                     }
                 });
+
+                viewHolder.mStarbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        processstar = true;
+                        mDatabaseStar.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(processstar){
+                                    if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                                        mDatabaseStar.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                        processstar = false;
+                                    }else{
+                                        mDatabaseStar.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("RandomValue");
+                                        processstar = false;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                }
+
+                });
+
+
             }
         };
 
@@ -162,10 +192,47 @@ public class MainActivity extends AppCompatActivity {
 
         View mView;
 
+        String mUserId;
+
+        ImageButton mStarbutton ;
+
+        DatabaseReference mDatabaseStar;
+        private FirebaseAuth mAuth;
+
         public NotesViewHolder(View itemView) {
             super(itemView);
 
             mView = itemView;
+
+            mStarbutton = (ImageButton) mView.findViewById(R.id.starbuttn);
+
+            mAuth = FirebaseAuth.getInstance();
+
+            mUserId = mAuth.getCurrentUser().getUid();
+
+            mDatabaseStar = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Star");
+
+            mDatabaseStar.keepSynced(true);
+        }
+
+        public void setStarbutton(final String post_key){
+
+            mDatabaseStar.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(post_key).hasChild(mUserId)){
+                        mStarbutton.setImageResource(R.mipmap.ic_star_black_24dp);
+                    }else{
+                        mStarbutton.setImageResource(R.mipmap.ic_star_border_black_24dp);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
         }
 
         public void setTitle(String title){
