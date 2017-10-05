@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/teal"
     tools:context="com.example.hp.cloudpad.SingleNoteActivity">
 
     <TextView
@@ -18,7 +19,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:fontFamily="cursive"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:id="@+id/singleTitle" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/singleDesc"
+        android:background="#e65100" />
 
     <TextView
         android:text="TextView"
@@ -28,6 +39,7 @@
         android:layout_below="@+id/singleTitle"
         android:layout_alignEnd="@+id/singleTitle"
         android:layout_marginTop="13dp"
+        android:textSize="15dp"
         android:id="@+id/singleDesc" />
 
     <Button
