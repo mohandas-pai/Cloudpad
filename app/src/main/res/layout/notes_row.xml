@@ -43,6 +43,14 @@
             android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
+        <View
+            android:id="@+id/line"
+            android:layout_width="245dp"
+            android:layout_gravity="center"
+            android:layout_height="1dp"
+            android:layout_above="@+id/singleDesc"
+            android:background="@color/teal" />
+
         <TextView
             android:id="@+id/postdesc"
             android:layout_width="match_parent"

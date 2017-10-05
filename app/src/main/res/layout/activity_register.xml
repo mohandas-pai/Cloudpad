@@ -59,6 +59,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/reg"
         android:fontFamily="cursive"
+        android:background="@color/grey"
+        android:textSize="20dp"
         android:layout_below="@+id/passField"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />

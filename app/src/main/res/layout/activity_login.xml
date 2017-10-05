@@ -12,60 +12,92 @@
     tools:context="com.example.hp.cloudpad.LoginActivity">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:hint="Email"
-            android:background="@drawable/input_outline"
-            android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:id="@+id/logInEmail"
-            android:fontFamily="monospace" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:ems="10"
-            android:background="@drawable/input_outline"
-            android:padding="10dp"
-            android:layout_below="@+id/logInEmail"
-            android:layout_alignStart="@+id/logInEmail"
-            android:layout_marginTop="13dp"
-            android:fontFamily="monospace"
-            android:id="@+id/logInPass" />
-
-        <Button
-            android:text="LogIn"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/ltitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logInPass"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp"
+            android:text="CloudPad"
+            android:textStyle="bold"
             android:fontFamily="cursive"
-            android:id="@+id/logbtn" />
+            android:layout_marginTop="35dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="55dp"
+            />
 
+        <TextView
+            android:id="@+id/ldesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notepad On the Cloud"
+            android:fontFamily="cursive"
+            android:layout_below="@+id/ltitle"
+            android:textSize="22dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:hint="Email"
+                android:background="@drawable/input_outline"
+                android:padding="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:id="@+id/logInEmail"
+                android:fontFamily="monospace" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:ems="10"
+                android:background="@drawable/input_outline"
+                android:padding="10dp"
+                android:layout_below="@+id/logInEmail"
+                android:layout_alignStart="@+id/logInEmail"
+                android:layout_marginTop="13dp"
+                android:fontFamily="monospace"
+                android:id="@+id/logInPass" />
+
+            <Button
+                android:text="LogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logInPass"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:fontFamily="cursive"
+                android:background="@color/grey"
+                android:id="@+id/logbtn" />
+
+        </RelativeLayout>
+
+        <Button
+            android:text="Need a new Account?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
+            android:id="@+id/newacc"
+            android:fontFamily="cursive"
+            android:textSize="25dp"
+            android:background="@color/grey"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
-
-    <Button
-        android:text="Need a new Account?"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
-        android:id="@+id/newacc"
-        android:fontFamily="cursive"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>

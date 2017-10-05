@@ -50,8 +50,8 @@
         android:layout_marginBottom="36dp"
         android:fontFamily="cursive"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@color/colorAccent"
-        android:textColor="#FFFFFF"
+        android:background="@color/grey"
+        android:textSize="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>
