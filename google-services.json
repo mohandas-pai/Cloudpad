@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "769544981455",
+    "firebase_url": "https://cloudpad-99297.firebaseio.com",
+    "project_id": "cloudpad-99297",
+    "storage_bucket": "cloudpad-99297.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769544981455:android:196ea6498e5e3f7b",
+        "android_client_info": {
+          "package_name": "com.example.hp.cloudpad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769544981455-5tdvt5pcn9b4umr032pfmebbagbgolgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi6D-EvPw2TudAi5tOJf7oQFTxcWVRbD4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
