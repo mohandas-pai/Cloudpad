@@ -86,6 +86,9 @@ public class LoginActivity extends AppCompatActivity {
                         mProgress.dismiss();
                         checkUserExist();
 
+                        mpass.setText("");
+                        mlog.setText("");
+
                     }else{
                         mProgress.dismiss();
                         Toast.makeText(LoginActivity.this,"Error Logging in",Toast.LENGTH_LONG);

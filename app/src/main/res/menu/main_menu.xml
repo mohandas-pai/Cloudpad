@@ -8,15 +8,4 @@
         app:showAsAction="always">
     </item>
 
-    <item android:id="@+id/settings"
-        android:title="Settings"
-        app:showAsAction="never">
-    </item>
-
-    <item android:id="@+id/logout"
-        android:title="Log Out"
-        app:showAsAction="never">
-    </item>
-
-
 </menu>

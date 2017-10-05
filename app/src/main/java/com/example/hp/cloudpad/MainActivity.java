@@ -58,6 +58,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
 
         mFirebaseUser = mAuth.getCurrentUser();
@@ -245,34 +256,6 @@ public class MainActivity extends AppCompatActivity {
             TextView post_desc = (TextView) mView.findViewById(R.id.postdesc);
             post_desc.setText(desc);
         }
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==R.id.action_add){
-            startActivity(new Intent(MainActivity.this,PostActivity.class));
-        }
-
-        if(item.getItemId()==R.id.logout){
-            logout();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void logout() {
-        mAuth.signOut();
-
-        Intent setupIntent = new Intent(MainActivity.this,LoginActivity.class);
-        setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(setupIntent);
 
     }
 
