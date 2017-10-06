@@ -1,5 +1,6 @@
 package com.example.hp.cloudpad;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -64,11 +65,21 @@ public class SingleNoteActivity extends AppCompatActivity {
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child(mNoteKey).removeValue();
+                AlertDialog.Builder adb = new AlertDialog.Builder(SingleNoteActivity.this);
+                adb.setTitle("Delete Note");
+                adb.setMessage("Are you sure?");
+                adb.setNegativeButton("No",null);
+                adb.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDatabase.child(mNoteKey).removeValue();
 
-                Intent mainIntent = new Intent(SingleNoteActivity.this,MainActivity.class);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(mainIntent);
+                        Intent mainIntent = new Intent(SingleNoteActivity.this,MainActivity.class);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(mainIntent);
+                    }
+                }).create().show();
+
             }
         });
 
