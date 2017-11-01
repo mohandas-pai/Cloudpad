@@ -20,9 +20,13 @@
             android:id="@+id/cloud1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
+            android:src="@drawable/cloud"
+            />
+        <ImageView
+            android:id="@+id/cloud2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/cloud1"
             android:src="@drawable/cloud"
             />
         <TextView
@@ -96,17 +100,7 @@
                 android:background="@color/grey"
                 android:id="@+id/logbtn" />
 
-            <ImageView
-                android:id="@+id/cloud2"
-                android:layout_height="wrap_content"
-                android:src="@drawable/anothercould"
-                android:layout_marginBottom="15dp"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:layout_above="@+id/logInEmail"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content" />
+
 
         </RelativeLayout>
 

@@ -12,7 +12,7 @@
     tools:context="com.example.hp.cloudpad.SingleNoteActivity">
 
     <TextView
-        android:text="TextView"
+        android:text="Here goes the title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -25,25 +25,19 @@
         android:textStyle="bold"
         android:id="@+id/singleTitle" />
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/singleTitle"
-        android:layout_above="@+id/singleDesc"
-        android:background="@color/grey"
-        android:layout_marginTop="10dp" />
 
     <TextView
-        android:text="TextView"
+        android:text="Here goes desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
+        android:fontFamily="monospace"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:background="@drawable/input_outline"
         android:layout_below="@+id/singleTitle"
         android:layout_alignEnd="@+id/singleTitle"
         android:layout_marginTop="13dp"
-        android:textSize="35dp"
+        android:textSize="27dp"
         android:id="@+id/singleDesc" />
 
     <Button

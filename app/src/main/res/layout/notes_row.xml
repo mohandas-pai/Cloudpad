@@ -55,10 +55,20 @@
             android:id="@+id/postdesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="cursive"
+            android:fontFamily="monospace"
             android:textSize="20dp"
             android:padding="10dp"
             android:text="Here goes description"/>
+
+        <TextView
+            android:id="@+id/posttime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Here goes time"
+            android:textAlignment="viewEnd"
+            android:paddingRight="10dp"
+            android:textColor="@color/colorAccent"
+            />
 
 
     </LinearLayout>

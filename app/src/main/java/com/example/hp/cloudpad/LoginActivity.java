@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         mpass = (EditText)findViewById(R.id.logInPass);
         mlogbt = (Button)findViewById(R.id.logbtn);
         mregisterbt = (Button)findViewById(R.id.newacc);
-
 
         mProgress = new ProgressDialog(this);
 
@@ -100,30 +100,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkUserExist() {
-        /*final String userId = mAuth.getCurrentUser().getUid();
-
-        mDatabaseUsr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(userId)){*/
-
-                    Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(mainIntent);
-
-                /*}else{
-                    Intent setupIntent = new Intent(LoginActivity.this,.class);
-                    setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(setupIntent);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+        Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(mainIntent);
     }
 
 

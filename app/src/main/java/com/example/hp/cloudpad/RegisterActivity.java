@@ -65,11 +65,6 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        /*String user_id = mAuth.getCurrentUser().getUid();
-                        /*DatabaseReference current_user_db = mDatabase.child(user_id);
-                        current_user_db.child("name").setValue(name);*/
-
-
                         mProgress.dismiss();
 
                         Intent mainIntent = new Intent(RegisterActivity.this,MainActivity.class);

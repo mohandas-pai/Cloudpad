@@ -13,6 +13,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class PostActivity extends AppCompatActivity {
 
     private EditText mPostTitle;
@@ -54,11 +57,13 @@ public class PostActivity extends AppCompatActivity {
     private void startPosting() {
         String title_val = mPostTitle.getText().toString().trim();
         String desc_val = mPostDesc.getText().toString().trim();
+        String date_val = new SimpleDateFormat("dd-MM-yyy HH:mm").format(Calendar.getInstance().getTime());
 
         if (!TextUtils.isEmpty(title_val) && !TextUtils.isEmpty(desc_val)) {
             DatabaseReference newPost = mDatabase.push();
             newPost.child("title").setValue(title_val);
             newPost.child("desc").setValue(desc_val);
+            newPost.child("datetime").setValue(date_val);
 
 
             startActivity(new Intent(PostActivity.this,MainActivity.class));

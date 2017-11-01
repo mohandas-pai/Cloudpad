@@ -5,15 +5,16 @@ package com.example.hp.cloudpad;
  */
 
 public class Note {
-    private String title,desc;
+    private String title,desc,datetime;
 
     public Note(){
 
     }
 
-    public Note(String title, String desc) {
+    public Note(String title, String desc, String datetime) {
         this.title = title;
         this.desc = desc;
+        this.datetime=datetime;
     }
 
     public String getTitle() {
@@ -30,5 +31,13 @@ public class Note {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 }

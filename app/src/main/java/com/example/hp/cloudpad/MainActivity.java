@@ -48,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean processstar = false;
 
-    private ShakeDetector mShakeDetector;
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(setupIntent);
         }
 
-
-        //mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
         mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
         mDatabaseStar = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Star");
 
@@ -116,25 +109,6 @@ public class MainActivity extends AppCompatActivity {
         mNotesList.setHasFixedSize(true);
         mNotesList.setLayoutManager(new LinearLayoutManager(this));
 
-
-
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
-            @Override
-            public void onShake() {
-                startActivity(new Intent(MainActivity.this,PostActivity.class));
-
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-                // Vibrate for 400 milliseconds
-                v.vibrate(400);
-
-            }
-        });
-
-
-
     }
 
     @Override
@@ -154,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+                viewHolder.setDatetime(model.getDatetime());
                 viewHolder.setStarbutton(post_key);
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -257,49 +232,10 @@ public class MainActivity extends AppCompatActivity {
             post_desc.setText(desc);
         }
 
-    }
-
-    private void checkUserExist() {
-        final String userId  ;
-
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            //Go to login
-            Intent setupIntent = new Intent(MainActivity.this,LoginActivity.class);
-            setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(setupIntent);
-        }
-        else{
-            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        public void setDatetime(String datetime) {
+            TextView post_time = (TextView) mView.findViewById(R.id.posttime);
+            post_time.setText(datetime);
         }
 
-        /*mDatabaseUsr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.hasChild(userId)){
-
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-*/
     }
-
-
-    protected void onResume() {
-        super.onResume();
-        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-    }
-
-    @Override
-    protected void onPause() {
-        mSensorManager.unregisterListener(mShakeDetector);
-        super.onPause();
-    }
-
 }
