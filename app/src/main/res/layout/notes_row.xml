@@ -9,6 +9,8 @@
     android:layout_marginTop="@dimen/task_card_half_spacing"
     android:layout_marginStart="@dimen/gutter"
     android:layout_marginEnd="@dimen/gutter"
+    android:configChanges="orientation"
+    android:screenOrientation="portrait"
     card_view:cardBackgroundColor="@color/grey"
     card_view:cardCornerRadius="2dp">
 

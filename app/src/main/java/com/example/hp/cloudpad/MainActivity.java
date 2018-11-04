@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
 import android.os.Vibrator;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
@@ -21,10 +22,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,15 +50,21 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     String mUserId;
     private long backPressedTime = 0;
+    FloatingActionButton fab;
 
     private boolean processstar = false;
+
+    LinearLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        layout = (LinearLayout) findViewById(R.id.progressbar_view);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -115,8 +126,10 @@ public class MainActivity extends AppCompatActivity {
                 mNotesList = (RecyclerView) findViewById(R.id.NotesList);
                 mNotesList.setHasFixedSize(true);
                 mNotesList.setLayoutManager(new LinearLayoutManager(this));
+                new Task().execute();
             }
         }
+
 
     }
 
@@ -247,6 +260,40 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
+    class Task extends AsyncTask<String, Integer, Boolean> {
+        @Override
+        protected void onPreExecute() {
+            layout.setVisibility(View.VISIBLE);
+            mNotesList.setVisibility(View.GONE);
+            fab.setVisibility(View.INVISIBLE);
+            //lla.setVisibility(View.GONE);
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            layout.setVisibility(View.GONE);
+            mNotesList.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.VISIBLE);
+            //lla.setVisibility(View.VISIBLE);
+            //adapter.notifyDataSetChanged();
+            super.onPostExecute(result);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... params) {
+
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

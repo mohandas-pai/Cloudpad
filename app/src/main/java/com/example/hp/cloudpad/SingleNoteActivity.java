@@ -82,6 +82,7 @@ public class SingleNoteActivity extends AppCompatActivity {
                         Intent mainIntent = new Intent(SingleNoteActivity.this,MainActivity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(mainIntent);
+                        finish();
                     }
                 }).create().show();
             }

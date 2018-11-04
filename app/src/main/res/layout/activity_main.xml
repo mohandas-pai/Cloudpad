@@ -6,7 +6,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal"
+    android:configChanges="orientation"
+    android:screenOrientation="portrait"
     tools:context="com.example.hp.cloudpad.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/progressbar_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="Loading Notes..." />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#C0C0C0" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/NotesList"
