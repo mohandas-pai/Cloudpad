@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -93,11 +94,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     }else{
                         mProgress.dismiss();
-                        Toast.makeText(LoginActivity.this,"Error Logging in",Toast.LENGTH_LONG);
+                        Log.i("Came","Here because of login failure");
+                        Toast.makeText(LoginActivity.this,"Error Logging in",Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
+        else
+            Toast.makeText(LoginActivity.this,"Email,password cant be empty",Toast.LENGTH_LONG).show();
     }
 
     private void checkUserExist() {

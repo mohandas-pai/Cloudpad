@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -69,5 +70,7 @@ public class PostActivity extends AppCompatActivity {
             startActivity(new Intent(PostActivity.this,MainActivity.class));
             finish();
         }
+        else
+            Toast.makeText(PostActivity.this,"Title,Description cant be empty",Toast.LENGTH_LONG).show();
     }
 }
