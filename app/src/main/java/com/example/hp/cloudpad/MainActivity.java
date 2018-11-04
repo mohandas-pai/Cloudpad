@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Vibrator;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mFirebaseUser;
     String mUserId;
+    private long backPressedTime = 0;
 
     private boolean processstar = false;
 
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, PostActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
             }
         });
 
@@ -70,44 +73,50 @@ public class MainActivity extends AppCompatActivity {
 
         if (mFirebaseUser == null) {
             //Go to login
+            Log.i("Came","Here 1");
             Intent setupIntent = new Intent(MainActivity.this,LoginActivity.class);
             setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(setupIntent);
+            finish();
         }
+        else {
             mUserId = mFirebaseUser.getUid();
-        if(mUserId == null){
-            //Go to login
-            Intent setupIntent = new Intent(MainActivity.this,LoginActivity.class);
-            setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(setupIntent);
-        }
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
-        mDatabaseStar = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Star");
-
-        mDatabase.keepSynced(true);
-        mDatabaseStar.keepSynced(true);
-
-
-
-
-
-
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null){
-                    Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(loginIntent);
-                }
+            if (mUserId == null) {
+                //Go to login
+                Log.i("Came", "Here 2");
+                Intent setupIntent = new Intent(MainActivity.this, LoginActivity.class);
+                setupIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(setupIntent);
+                finish();
             }
-        };
+            else {
+                Log.i("Main Activity", "mAuth:" + mAuth + " mFirebaseUser:" + mFirebaseUser + " mUserId:" + mUserId);
 
-        mNotesList = (RecyclerView) findViewById(R.id.NotesList);
-        mNotesList.setHasFixedSize(true);
-        mNotesList.setLayoutManager(new LinearLayoutManager(this));
+                mDatabase = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Notes");
+                mDatabaseStar = FirebaseDatabase.getInstance().getReference().child("MyUsers").child(mUserId).child("Star");
+
+                mDatabase.keepSynced(true);
+                mDatabaseStar.keepSynced(true);
+
+
+                mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+                    @Override
+                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                        if (firebaseAuth.getCurrentUser() == null) {
+                            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(loginIntent);
+                            finish();
+                        }
+                    }
+                };
+
+                mNotesList = (RecyclerView) findViewById(R.id.NotesList);
+                mNotesList.setHasFixedSize(true);
+                mNotesList.setLayoutManager(new LinearLayoutManager(this));
+            }
+        }
 
     }
 
@@ -238,4 +247,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id== R.id.call_log){
+            mAuth.signOut();
+            Intent loginIntent = new Intent(MainActivity.this,LoginActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(loginIntent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {        // to prevent irritating accidental logouts
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 2000) {    // 2 secs
+            backPressedTime = t;
+            Toast.makeText(this, "Press back again to quit",
+                    Toast.LENGTH_SHORT).show();
+        } else {    // this guy is serious
+            // clean up
+            super.onBackPressed();       // bye
+        }
+
+    }
+
 }

@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(LoginActivity.this,RegisterActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(mainIntent);
+                finish();
             }
         });
     }
@@ -103,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(mainIntent);
+        finish();
     }
 
 
